@@ -39,6 +39,7 @@
     "classname": "^0.0.0",
     "classnames": "^2.3.1",
     "node-sass": "^7.0.1",
-    "react-icons": "^4.4.0"
+    "react-icons": "^4.4.0",
+    "react-virtualized": "^9.22.3"
   }
 }
