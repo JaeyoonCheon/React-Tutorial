@@ -117,38 +117,79 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"index.js":[function(require,module,exports) {
-var divToggle = document.querySelector(".toggle");
-var counter = document.querySelector("h1");
-var btnIncrease = document.querySelector("#increase");
-var btnDecrease = document.querySelector("#decrease");
-var TOGGLE_SWITCH = "TOGGLE_SWITCH";
-var INCREASE = "INCREASE";
-var DECREASE = "DECREASE";
+})({"../../../.nvm/versions/node/v16.13.1/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
 
-var toggleSwitch = function toggleSwitch() {
-  return {
-    type: TOGGLE_SWITCH
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
+
+  return bundleURL;
+}
+
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)?\/[^/]+(?:\?.*)?$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"../../../.nvm/versions/node/v16.13.1/lib/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+
+  newLink.onload = function () {
+    link.remove();
   };
-};
 
-var increase = function increase() {
-  return {
-    type: INCREASE
-  };
-};
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
 
-var decrease = function decrease() {
-  return {
-    type: DECREASE
-  };
-};
+var cssTimeout = null;
 
-var initialState = {
-  toggle: false,
-  counter: 0
-};
-},{}],"../../../.nvm/versions/node/v16.13.1/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+
+    cssTimeout = null;
+  }, 50);
+}
+
+module.exports = reloadCSS;
+},{"./bundle-url":"../../../.nvm/versions/node/v16.13.1/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"index.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../../../.nvm/versions/node/v16.13.1/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../../.nvm/versions/node/v16.13.1/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -352,5 +393,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../.nvm/versions/node/v16.13.1/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.js"], null)
-//# sourceMappingURL=/vanilla-redux.e31bb0bc.js.map
+},{}]},{},["../../../.nvm/versions/node/v16.13.1/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
+//# sourceMappingURL=/vanilla-redux.9ad09f98.js.map
