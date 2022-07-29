@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import palette from "../../lib/styles/palette";
 
-const styledButton = styled.button`
+const StyledButton = styled.button`
   border: none;
   border-radius: 4px;
   font-size: 1rem;
@@ -18,6 +18,6 @@ const styledButton = styled.button`
   }
 `;
 
-const Button = (props) => <styledButton {...props}></styledButton>;
+const Button = (props) => <StyledButton {...props}></StyledButton>;
 
 export default Button;
