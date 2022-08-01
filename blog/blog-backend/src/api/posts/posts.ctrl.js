@@ -164,7 +164,7 @@ export const update = async (ctx) => {
   }
   const nextData = { ...ctx.request.body };
   if (nextData.body) {
-    nextData.body = sanitizeHtml(nextData.body);
+    nextData.body = sanitizeHtml(nextData.body, sanitizeOption);
   }
   try {
     const post = await Post.findByIdAndUpdate(id, nextData, {
