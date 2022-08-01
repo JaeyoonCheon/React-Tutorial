@@ -11,7 +11,11 @@ const PaginationContainer = ({ location }) => {
     loading: loading["posts/LIST_POSTS"],
   }));
 
-  if (!posts || loading) return null;
+  if (!posts || loading) {
+    console.log(posts);
+    console.log(loading);
+    return null;
+  }
 
   const {
     tag,
@@ -31,4 +35,4 @@ const PaginationContainer = ({ location }) => {
   );
 };
 
-export default PaginationContainer;
+export default withRouter(PaginationContainer);

@@ -14,14 +14,12 @@ export default function createRequestSaga(type, request) {
 
   return function* (action) {
     yield put(startLoading(type));
-
     try {
-      console.log(action.payload);
       const response = yield call(request, action.payload);
       yield put({
         type: SUCCESS,
         payload: response.data,
-        mata: response,
+        meta: response,
       });
     } catch (e) {
       yield put({

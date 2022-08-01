@@ -23,6 +23,9 @@ const PostListContainer = ({ location }) => {
     dispatch(listPosts({ tag, username, page }));
   }, [dispatch, location.search]);
 
+  console.log("wowowowowow");
+  console.log(user);
+  console.log(posts);
   return (
     <PostList
       loading={loading}
