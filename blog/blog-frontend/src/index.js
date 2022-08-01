@@ -8,13 +8,18 @@ import { applyMiddleware } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import { composeWithDevTools } from "redux-devtools-extension";
+import createSagaMiddleware from "@redux-saga/core";
+import rootReducer, { rootSaga } from "./modules";
 
-import rootReducer from "./modules";
+const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
   reducer: rootReducer,
+  middleware: [sagaMiddleware],
   devTools: composeWithDevTools(),
 });
+
+sagaMiddleware.run(rootSaga);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
