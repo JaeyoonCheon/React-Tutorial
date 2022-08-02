@@ -4,13 +4,13 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-import { applyMiddleware } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import { composeWithDevTools } from "redux-devtools-extension";
 import createSagaMiddleware from "@redux-saga/core";
 import rootReducer, { rootSaga } from "./modules";
 import { tempSetUser, check } from "./modules/user";
+import { HelmetProvider } from "react-helmet-async";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -39,7 +39,9 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <HelmetProvider>
+        <App />
+      </HelmetProvider>
     </BrowserRouter>
   </Provider>
 );
