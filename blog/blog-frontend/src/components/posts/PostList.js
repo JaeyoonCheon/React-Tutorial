@@ -40,7 +40,6 @@ const PostItemBlock = styled.div`
 `;
 
 const PostItem = ({ post }) => {
-  console.log(post);
   const { publishedDate, user, tags, title, body, _id } = post;
   return (
     <PostItemBlock>

@@ -12,8 +12,6 @@ const PaginationContainer = ({ location }) => {
   }));
 
   if (!posts || loading) {
-    console.log(posts);
-    console.log(loading);
     return null;
   }
 
